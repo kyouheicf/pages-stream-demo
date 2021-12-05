@@ -87,7 +87,8 @@ export async function onRequestPatch(context) {
             }
         })
     })
-
+    console.log(res)
+    console.log(data)
     return res
 }
 
