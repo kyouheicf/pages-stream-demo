@@ -88,7 +88,7 @@ export async function onRequestPatch(context) {
         }),
     })
 
-    return res
+    return JSON.stringify({meta:{...body}})
 }
 
 export async function onRequestDelete(context) {
