@@ -82,8 +82,7 @@ export async function onRequestPatch(context) {
         },
         body: JSON.stringify({
             meta: {
-                ...body,
-                modified_by: data.user.email
+                ...body
             }
         })
     })
