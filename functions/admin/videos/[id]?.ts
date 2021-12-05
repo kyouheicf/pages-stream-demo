@@ -78,7 +78,8 @@ export async function onRequestPatch(context) {
     const res = await fetch(`https://api.cloudflare.com/client/v4/accounts/${env.CF_ACCOUNT_ID}/stream/${id}`, {
         method: "POST",
         headers: {
-            Authorization: `Bearer ${env.CF_API_TOKEN_STREAM}`
+            "Authorization": `Bearer ${env.CF_API_TOKEN_STREAM}`,
+            "content-type": "application/json"
         },
         body: JSON.stringify({
             meta: {
