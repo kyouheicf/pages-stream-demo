@@ -61,17 +61,34 @@ export async function onRequestPost(context) {
 }
 
 export async function onRequestPatch(context) {
-    // Contents of context object
-  const {
-    request, // same as existing Worker API
-    env, // same as existing Worker API
-    params, // if filename includes [id] or [[path]]
-    waitUntil, // same as ctx.waitUntil in existing Worker API
-    next, // used for middleware or to fetch assets
-    data, // arbitrary space for passing data between middlewares
-  } = context;
+    const {
+        request,
+        env,
+        params,
+        data,
+    } = context
 
-  return new Response("Hello, world!");
+    const body = await request.json()
+    const { id } = params
+
+    if (!id) {
+        return new Response(null, {status: 400})
+    }
+
+    const res = await fetch(`https://api.cloudflare.com/client/v4/accounts/${env.CF_ACCOUNT_ID}/stream/${id}`, {
+        method: "POST",
+        headers: {
+            "Authorization": `Bearer ${env.CF_API_TOKEN_STREAM}`
+        },
+        body: JSON.stringify({
+            meta: {
+                ...body,
+                modified_by: data.user.email
+            }
+        })
+    })
+
+    return res
 }
 
 export async function onRequestDelete(context) {
