@@ -9,7 +9,7 @@
     <script src="https://unpkg.com/alpinejs" defer></script>
     <script>
       async function getOneTimeUploadUrl() {
-          const res = await fetch('/admin/videos', {method: 'POST', headers: {'accept': 'application/json'}})
+          const res = await fetch('/api/admin/videos', {method: 'POST', headers: {'accept': 'application/json'}})
           const upload = await res.json()
           return upload.uploadURL
       }
@@ -56,12 +56,12 @@
         class="min-h-full"
         @reload="
         loading = true
-        videosPromise = fetch('/admin/videos', {headers: {'accept': 'application/json'}})
+        videosPromise = fetch('/api/admin/videos', {headers: {'accept': 'application/json'}})
             .then(x => x.json())
             .then(data => {
                 videos = data
             })
-        liveInputsPromise = fetch('/admin/live_inputs', )
+        liveInputsPromise = fetch('/api/admin/live_inputs', )
           .then(x => x.json())
           .then(data => {
             liveInputs = data
@@ -84,7 +84,7 @@
         }"
         x-init="
             loading = true
-            fetch('/admin/profile', {headers: {'accept': 'application/json'}})
+            fetch('/api/admin/profile', {headers: {'accept': 'application/json'}})
               .then(x => x.json())
               .then(data => {
                   user = data
@@ -168,7 +168,7 @@
                 <span class="text-xl bg-blue-500 m2 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer"
                   @click="
                     loading = true
-                    fetch('/admin/live_inputs', {method: 'POST'}).then(x => $dispatch('reload'))
+                    fetch('/api/admin/live_inputs', {method: 'POST'}).then(x => $dispatch('reload'))
                   "
                 >
                   Create a live input
@@ -219,7 +219,7 @@
                                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                     <span class="cursor-pointer" @click="
                                       loading = true
-                                      fetch('/admin/live_inputs/'+live_input.uid, {method: 'GET'}).then(x => x.json()).then(x => alert(x.rtmps.streamKey)).then(() => $dispatch('reload'))
+                                      fetch('/api/admin/live_inputs/'+live_input.uid, {method: 'GET'}).then(x => x.json()).then(x => alert(x.rtmps.streamKey)).then(() => $dispatch('reload'))
                                     ">Show key</span>
                                   </td>
                                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -229,7 +229,7 @@
                                     <a 
                                       @click.prevent="
                                         loading = true
-                                        fetch('/admin/live_inputs/'+live_input.uid, {method: 'PATCH', body: JSON.stringify({ ...video.meta, name })}).then(x => $dispatch('reload'))
+                                        fetch('/api/admin/live_inputs/'+live_input.uid, {method: 'PATCH', body: JSON.stringify({ ...video.meta, name })}).then(x => $dispatch('reload'))
                                       " 
                                       href="#" class="text-indigo-600 hover:text-indigo-900">Save</a>
                                       -
@@ -237,7 +237,7 @@
                                       @click.prevent="
                                         if(confirm('Are you sure?')) {
                                           loading = true
-                                          fetch('/admin/live_inputs/'+live_input.uid, {method: 'DELETE'}).then(x => $dispatch('reload'))
+                                          fetch('/api/admin/live_inputs/'+live_input.uid, {method: 'DELETE'}).then(x => $dispatch('reload'))
                                         }
                                       " 
                                       href="#" class="text-red-600 hover:text-red-900">Delete</a>
@@ -305,7 +305,7 @@
                                       x-text="video.meta.visibility === 'public' ? 'Make private' : 'Make public'"
                                       @click.prevent="
                                         loading = true
-                                        fetch('/admin/videos/'+video.uid, {method: 'PATCH', body: JSON.stringify({ ...video.meta, name, visibility: video.meta.visibility === 'public' ? 'private' : 'public' })}).then(x => $dispatch('reload'))
+                                        fetch('/api/admin/videos/'+video.uid, {method: 'PATCH', body: JSON.stringify({ ...video.meta, name, visibility: video.meta.visibility === 'public' ? 'private' : 'public' })}).then(x => $dispatch('reload'))
                                         " 
                                       href="#" :class="video.meta.visibility === 'public' ? 'text-red-600 hover:text-red-900' : 'text-green-600 hover:text-green-900'"></a>
                                       -
@@ -315,7 +315,7 @@
                                     <a 
                                       @click.prevent="
                                         loading = true
-                                        fetch('/admin/videos/'+video.uid, {method: 'PATCH', body: JSON.stringify({ ...video.meta, name })}).then(x => $dispatch('reload'))
+                                        fetch('/api/admin/videos/'+video.uid, {method: 'PATCH', body: JSON.stringify({ ...video.meta, name })}).then(x => $dispatch('reload'))
                                       " 
                                       href="#" class="text-indigo-600 hover:text-indigo-900">Save</a>
                                       -
@@ -323,7 +323,7 @@
                                       @click.prevent="
                                         if(confirm('Are you sure?')) {
                                           loading = true
-                                          fetch('/admin/videos/'+video.uid, {method: 'DELETE'}).then(x => $dispatch('reload'))
+                                          fetch('/api/admin/videos/'+video.uid, {method: 'DELETE'}).then(x => $dispatch('reload'))
                                         }
                                       " 
                                       href="#" class="text-red-600 hover:text-red-900">Delete</a>
