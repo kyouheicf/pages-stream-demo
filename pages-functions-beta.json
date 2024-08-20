@@ -1,6 +1,6 @@
 {
     "entryPoint": "./functions",
-    "baseURL": ".",
+    "baseURL": "/api",
     "miniflare": {
       "envPath": ".env"
     }
