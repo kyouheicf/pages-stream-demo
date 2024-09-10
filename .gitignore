@@ -6,3 +6,5 @@ dist/*
 yarn.lock 
 .pages
 .DS_Store
+.dev.vars
+.wrangler/*

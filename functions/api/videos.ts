@@ -1,4 +1,4 @@
-import { getSignedStreamId } from "../../../src/cfStream"
+import { getSignedStreamId } from "../../src/cfStream"
 
 export async function onRequestGet(context) {
     const {
@@ -39,6 +39,7 @@ export async function onRequestGet(context) {
                 "Authorization": `Bearer ${env.CF_API_TOKEN_STREAM}`
             }
         })).json()
+        console.log(res)
 
         const filteredVideos = res.result.filter(x => x.meta.visibility === "public") 
         const videos = await Promise.all(filteredVideos.map(async x => {
