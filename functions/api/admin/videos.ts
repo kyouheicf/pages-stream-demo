@@ -1,4 +1,4 @@
-import { getSignedStreamId } from "../../../../src/cfStream"
+import { getSignedStreamId } from "../../../src/cfStream"
 
 export async function onRequestGet(context) {
     // Contents of context object
