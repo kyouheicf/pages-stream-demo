@@ -29,7 +29,7 @@ export async function onRequestPost(context) {
     // Contents of context object
     const {
         env,
-        data,
+        //data,
     } = context
 
     const res = await fetch(`https://api.cloudflare.com/client/v4/accounts/${env.CF_ACCOUNT_ID}/stream/direct_upload`, {
