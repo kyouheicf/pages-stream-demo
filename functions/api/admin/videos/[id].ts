@@ -52,7 +52,7 @@ export async function onRequestPost(context) {
         },
         body: JSON.stringify({
             meta: {
-                modified_by: data.user.email
+                //modified_by: data.user.email
             }
         })
     })
@@ -83,7 +83,7 @@ export async function onRequestPatch(context) {
         body: JSON.stringify({
             meta: {
                 ...body,
-                modified_by: data.user.email
+                //modified_by: data.user.email
             }
         })
     })
