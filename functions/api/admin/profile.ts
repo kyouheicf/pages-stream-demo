@@ -4,6 +4,7 @@ export async function onRequestGet(context) {
         data,
     } = context
 
+    console.log(JSON.stringify(data.user))
     return new Response(JSON.stringify(data.user), {
         headers: {
             "content-type": "application/json"
