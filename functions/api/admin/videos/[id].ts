@@ -65,7 +65,7 @@ export async function onRequestPatch(context) {
         request,
         env,
         params,
-        data,
+        //data,
     } = context
 
     const body = await request.json()
