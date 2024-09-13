@@ -34,7 +34,7 @@ export async function onRequestPost(context) {
     // Contents of context object
     const {
         env,
-        data,
+        //data,
     } = context
 
     const res = await fetch(`https://api.cloudflare.com/client/v4/accounts/${env.CF_ACCOUNT_ID}/stream/live_inputs`, {
@@ -50,8 +50,8 @@ export async function onRequestPost(context) {
                 allowedOrigins: [],
             },
             meta: {
-                author: data.user.email,
-                name: `${data.user.email.split("@")[0]}'s stream`
+                //author: data.user.email,
+                //name: `${data.user.email.split("@")[0]}'s stream`
             }
         })
     })

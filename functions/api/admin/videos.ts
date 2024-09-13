@@ -29,7 +29,7 @@ export async function onRequestPost(context) {
     // Contents of context object
     const {
         env,
-        data,
+        //data,
     } = context
 
     const res = await fetch(`https://api.cloudflare.com/client/v4/accounts/${env.CF_ACCOUNT_ID}/stream/direct_upload`, {
@@ -52,7 +52,7 @@ export async function onRequestPost(context) {
         },
         body: JSON.stringify({
             meta: {
-                modified_by: data.user.email
+                //modified_by: data.user.email
             }
         })
     })
@@ -65,7 +65,7 @@ export async function onRequestPatch(context) {
         request,
         env,
         params,
-        data,
+        //data,
     } = context
 
     const body = await request.json()
@@ -83,7 +83,7 @@ export async function onRequestPatch(context) {
         body: JSON.stringify({
             meta: {
                 ...body,
-                modified_by: data.user.email
+                //modified_by: data.user.email
             }
         })
     })
