@@ -8,11 +8,21 @@ export const onRequest = [
 
 import cloudflareAccessPlugin from "@cloudflare/pages-plugin-cloudflare-access";
 
-export const onRequest: PagesFunction<Env> = (context) => {
+export const onRequest: PagesFunction<unknown, any, PluginData, Env> = (context) => {
   const url = new URL(context.request.url);
-  if(url.hostname === "localhost" || url.hostname === "127.0.0.1"){
-      return context.next();
+  if (url.hostname === "localhost" || url.hostname === "127.0.0.1") {
+    context.data.cloudflareAccess = {
+      JWT: {
+        payload: {
+          name: "First Last",
+          email: "localhost@example.com",
+        },
+      },
+    };
+    console.log(JSON.stringify(context.data));
+    return context.next();
   }
+
   return cloudflareAccessPlugin({
       domain: `"https://${context.env.CF_ACCESS_TEAM_NAME}.cloudflareaccess.com"`,
       aud: `"${context.env.CF_ACCESS_APP_AUD}"`,
