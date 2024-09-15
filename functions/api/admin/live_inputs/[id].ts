@@ -1,4 +1,4 @@
-import { getSignedStreamId } from "../../../src/cfStream"
+import { getSignedStreamId } from "../../../../src/cfStream"
 
 export async function onRequestGet(context) {
     // Contents of context object
@@ -34,8 +34,10 @@ export async function onRequestPost(context) {
     // Contents of context object
     const {
         env,
-        //data,
+        data,
     } = context
+
+    data.user = data.cloudflareAccess?.JWT?.payload;
 
     const res = await fetch(`https://api.cloudflare.com/client/v4/accounts/${env.CF_ACCOUNT_ID}/stream/live_inputs`, {
         method: "POST",
@@ -50,8 +52,8 @@ export async function onRequestPost(context) {
                 allowedOrigins: [],
             },
             meta: {
-                //author: data.user.email,
-                //name: `${data.user.email.split("@")[0]}'s stream`
+                author: data.user.email,
+                name: `${data.user.email.split("@")[0]}'s stream`
             }
         })
     })

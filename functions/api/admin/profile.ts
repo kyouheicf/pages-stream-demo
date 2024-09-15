@@ -4,13 +4,13 @@ export async function onRequestGet(context) {
         data,
     } = context
 
-    console.log(JSON.stringify(data));
-    const user = data.cloudflareAccess?.JWT?.payload;
-    console.log(JSON.stringify(user));
+    //console.log(JSON.stringify(context));
+    data.user = data.cloudflareAccess?.JWT?.payload;
+    //console.log(JSON.stringify(data.user));
 
     //const identity = await data.cloudflareAccess.JWT.getIdentity();
     //console.log(JSON.stringify(identity))
-    return new Response(JSON.stringify(user), {
+    return new Response(JSON.stringify(data.user), {
         headers: {
             "content-type": "application/json"
         }

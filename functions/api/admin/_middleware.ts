@@ -19,7 +19,7 @@ export const onRequest: PagesFunction<unknown, any, PluginData, Env> = (context)
         },
       },
     };
-    console.log(JSON.stringify(context.data));
+    //console.log(JSON.stringify(context.data));
     return context.next();
   }
 
