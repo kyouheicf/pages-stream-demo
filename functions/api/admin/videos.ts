@@ -32,8 +32,6 @@ export async function onRequestPost(context) {
         data,
     } = context
 
-    data.user = data.cloudflareAccess?.JWT?.payload;
-
     const res = await fetch(`https://api.cloudflare.com/client/v4/accounts/${env.CF_ACCOUNT_ID}/stream/direct_upload`, {
         method: "POST",
         headers: {
@@ -69,8 +67,6 @@ export async function onRequestPatch(context) {
         params,
         data,
     } = context
-
-    data.user = data.cloudflareAccess?.JWT?.payload;
 
     const body = await request.json()
     const { id } = params

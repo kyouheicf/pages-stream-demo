@@ -37,8 +37,6 @@ export async function onRequestPost(context) {
         data,
     } = context
 
-    data.user = data.cloudflareAccess?.JWT?.payload;
-
     const res = await fetch(`https://api.cloudflare.com/client/v4/accounts/${env.CF_ACCOUNT_ID}/stream/live_inputs`, {
         method: "POST",
         headers: {
