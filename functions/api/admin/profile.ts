@@ -4,9 +4,9 @@ export async function onRequestGet(context) {
         data,
     } = context
 
-    //console.log(JSON.stringify(context));
-    data.user = data.cloudflareAccess?.JWT?.payload;
-    //console.log(JSON.stringify(data.user));
+    console.log(JSON.stringify(context));
+    //data.user = data.cloudflareAccess?.JWT?.payload;
+    console.log(JSON.stringify(data.user));
 
     //const identity = await data.cloudflareAccess.JWT.getIdentity();
     //console.log(JSON.stringify(identity))

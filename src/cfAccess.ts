@@ -87,6 +87,16 @@ export const verifyJwtSignature = (jwsObject, jwk) => {
 // Validate JWT and pass user info to next middlewares/onRequest handler
 export const cfTeamsAccessAuthMiddleware = async ({request, data, env, next}) => {
   try {
+    const url = new URL(request.url);
+    if (url.hostname === "localhost" || url.hostname === "127.0.0.1") {
+      data.user = {
+        name: "First Last",
+        email: "localhost@example.com",
+      }
+      console.log(JSON.stringify(data));
+      return next()
+    }    
+
       // Validate Cloudflare Access JWT token and return decoded data
       const decodedJwt = await verifyCloudflareAccessJwt(request, env);
       if (!decodedJwt.success) {
